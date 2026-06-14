@@ -37,7 +37,7 @@ Plataforma web donde los creadores de contenido pueden crear su página personal
 ### 1. Clonar el repositorio
 
 ```bash
-git clone <url-del-repositorio>
+git clone https://github.com/anfresitoo/Creators_web
 cd creators_webs
 ```
 
