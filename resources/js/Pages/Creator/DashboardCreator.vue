@@ -2,43 +2,43 @@
   <AuthenticatedLayout>
     <div class="max-w-7xl mx-auto">
       <!-- Mensaje flash global -->
-      <div v-if="$page.props.flash?.success" class="mb-6 p-3 bg-green-50 border border-green-200 rounded-lg text-green-700 text-sm">
+      <div v-if="$page.props.flash?.success" class="mb-6 p-3 bg-green-900/30 border border-green-500/50 rounded-lg text-neon-green text-sm">
         {{ $page.props.flash.success }}
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <!-- Sidebar -->
         <div class="lg:col-span-1">
-          <div class="bg-white rounded-lg shadow p-6 sticky top-4">
+          <div class="bg-dark-panel border border-neon-cyan/30 rounded-xl shadow-[0_0_15px_rgba(0,243,255,0.1)] p-6 sticky top-4">
             <div class="text-center mb-6">
               <img
                 v-if="creator.avatar_url"
                 :src="creator.avatar_url"
                 :alt="creatorName"
-                class="w-20 h-20 rounded-full mx-auto mb-4 object-cover"
+                class="w-20 h-20 rounded-full mx-auto mb-4 object-cover border border-neon-cyan shadow-[0_0_10px_rgba(0,243,255,0.4)]"
               />
-              <div v-else class="w-20 h-20 rounded-full mx-auto mb-4 bg-gray-300 flex items-center justify-center">
-                <span class="text-2xl text-gray-600">{{ creatorName.charAt(0) }}</span>
+              <div v-else class="w-20 h-20 rounded-full mx-auto mb-4 bg-dark-bg flex items-center justify-center border border-neon-cyan shadow-[0_0_10px_rgba(0,243,255,0.4)]">
+                <span class="text-2xl text-neon-cyan font-black">{{ creatorName.charAt(0) }}</span>
               </div>
-              <h2 class="text-xl font-bold text-gray-900">{{ creatorName }}</h2>
-              <p class="text-sm text-gray-600">/@{{ creator.slug }}</p>
+              <h2 class="text-xl font-bold text-gray-100 uppercase tracking-wide">{{ creatorName }}</h2>
+              <p class="text-sm text-neon-cyan mt-1">/@{{ creator.slug }}</p>
               <a
                 :href="`/@${creator.slug}`"
                 target="_blank"
-                class="text-blue-600 hover:text-blue-700 text-sm mt-2 inline-block"
+                class="text-gray-400 hover:text-neon-magenta text-sm mt-3 inline-block transition-colors"
               >
                 Ver página pública →
               </a>
             </div>
 
-            <div class="border-t pt-6 space-y-3">
+            <div class="border-t border-dark-border pt-6 space-y-3">
               <button
                 @click="activeTab = 'profile'"
                 :class="[
-                  'w-full text-left px-4 py-2 rounded transition',
+                  'w-full text-left px-4 py-3 rounded-lg transition-all font-bold tracking-wide',
                   activeTab === 'profile'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200',
+                    ? 'bg-neon-cyan text-dark-bg shadow-[0_0_10px_rgba(0,243,255,0.4)]'
+                    : 'bg-dark-bg text-gray-400 border border-dark-border hover:border-neon-cyan hover:text-neon-cyan',
                 ]"
               >
                 📝 Editar Perfil
@@ -46,10 +46,10 @@
               <button
                 @click="activeTab = 'links'"
                 :class="[
-                  'w-full text-left px-4 py-2 rounded transition',
+                  'w-full text-left px-4 py-3 rounded-lg transition-all font-bold tracking-wide',
                   activeTab === 'links'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200',
+                    ? 'bg-neon-magenta text-white shadow-[0_0_10px_rgba(255,0,255,0.4)]'
+                    : 'bg-dark-bg text-gray-400 border border-dark-border hover:border-neon-magenta hover:text-neon-magenta',
                 ]"
               >
                 🔗 Mis Enlaces
@@ -57,10 +57,10 @@
               <button
                 @click="activeTab = 'supports'"
                 :class="[
-                  'w-full text-left px-4 py-2 rounded transition',
+                  'w-full text-left px-4 py-3 rounded-lg transition-all font-bold tracking-wide',
                   activeTab === 'supports'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200',
+                    ? 'bg-neon-green text-dark-bg shadow-[0_0_10px_rgba(57,255,20,0.4)]'
+                    : 'bg-dark-bg text-gray-400 border border-dark-border hover:border-neon-green hover:text-neon-green',
                 ]"
               >
                 💚 Apoyos
@@ -72,95 +72,91 @@
         <!-- Main Content -->
         <div class="lg:col-span-2">
           <!-- Profile Tab -->
-          <div v-if="activeTab === 'profile'" class="bg-white rounded-lg shadow p-6 space-y-6">
+          <div v-if="activeTab === 'profile'" class="bg-dark-panel border border-neon-cyan/30 rounded-xl shadow-[0_0_15px_rgba(0,243,255,0.1)] p-6 space-y-6">
             <div>
-              <h3 class="text-2xl font-bold text-gray-900 mb-4">Editar Perfil</h3>
+              <h3 class="text-2xl font-black text-gray-100 mb-6 uppercase tracking-wide">Editar Perfil</h3>
 
               <!-- Mensaje de éxito del perfil -->
-              <div v-if="profileSuccess" class="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg text-green-700 text-sm">
+              <div v-if="profileSuccess" class="mb-6 p-3 bg-green-900/30 border border-green-500/50 rounded-lg text-neon-green text-sm">
                 {{ profileSuccess }}
               </div>
 
-              <form @submit.prevent="updateProfile" class="space-y-4">
+              <form @submit.prevent="updateProfile" class="space-y-5">
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Nombre público</label>
+                  <label class="block text-xs font-bold text-gray-400 uppercase tracking-wide mb-1">Nombre público</label>
                   <input
                     v-model="profileForm.display_name"
                     type="text"
                     maxlength="100"
-                    placeholder="Tu nombre de creador (ej: Juan Gameplays)"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Tu nombre de creador"
+                    class="w-full px-4 py-3 bg-dark-bg border border-dark-border text-white rounded-lg focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan placeholder-gray-600"
                     :class="{ 'border-red-500': profileErrors.display_name }"
                   />
-                  <p v-if="profileErrors.display_name" class="text-sm text-red-600 mt-1">{{ profileErrors.display_name }}</p>
-                  <p class="text-xs text-gray-500 mt-1">Este nombre se mostrará en tu página pública. Si lo dejas vacío, se usará tu nombre de cuenta.</p>
+                  <p v-if="profileErrors.display_name" class="text-sm text-red-500 mt-1">{{ profileErrors.display_name }}</p>
                 </div>
 
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Slug (URL)</label>
-                  <div class="flex items-center">
-                    <span class="text-gray-600">/@</span>
+                  <label class="block text-xs font-bold text-gray-400 uppercase tracking-wide mb-1">Slug (URL)</label>
+                  <div class="flex items-center border border-dark-border bg-dark-bg rounded-lg overflow-hidden focus-within:border-neon-cyan focus-within:ring-1 focus-within:ring-neon-cyan" :class="{ 'border-red-500': profileErrors.slug }">
+                    <span class="px-4 py-3 bg-dark-panel text-gray-500 border-r border-dark-border font-bold">/@</span>
                     <input
                       v-model="profileForm.slug"
                       type="text"
                       required
                       pattern="[a-z0-9_-]+"
-                      class="flex-1 ml-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      :class="{ 'border-red-500': profileErrors.slug }"
+                      class="flex-1 px-4 py-3 bg-transparent text-white focus:outline-none placeholder-gray-600"
                       placeholder="tu-slug"
                     />
                   </div>
-                  <p v-if="profileErrors.slug" class="text-sm text-red-600 mt-1">{{ profileErrors.slug }}</p>
-                  <p class="text-xs text-gray-500 mt-1">Solo letras minúsculas, números, guiones y guiones bajos</p>
+                  <p v-if="profileErrors.slug" class="text-sm text-red-500 mt-1">{{ profileErrors.slug }}</p>
                 </div>
 
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Bio</label>
+                  <label class="block text-xs font-bold text-gray-400 uppercase tracking-wide mb-1">Bio</label>
                   <textarea
                     v-model="profileForm.bio"
                     maxlength="500"
                     rows="4"
                     placeholder="Cuéntales sobre ti..."
-                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="w-full px-4 py-3 bg-dark-bg border border-dark-border text-white rounded-lg focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan placeholder-gray-600 resize-none"
                     :class="{ 'border-red-500': profileErrors.bio }"
                   ></textarea>
-                  <p v-if="profileErrors.bio" class="text-sm text-red-600 mt-1">{{ profileErrors.bio }}</p>
+                  <p v-if="profileErrors.bio" class="text-sm text-red-500 mt-1">{{ profileErrors.bio }}</p>
                   <p class="text-xs text-gray-500 mt-1">{{ profileForm.bio?.length || 0 }}/500 caracteres</p>
                 </div>
 
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Avatar URL</label>
+                  <label class="block text-xs font-bold text-gray-400 uppercase tracking-wide mb-1">Avatar URL</label>
                   <input
                     v-model="profileForm.avatar_url"
                     type="url"
                     placeholder="https://ejemplo.com/avatar.jpg"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="w-full px-4 py-3 bg-dark-bg border border-dark-border text-white rounded-lg focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan placeholder-gray-600"
                     :class="{ 'border-red-500': profileErrors.avatar_url }"
                   />
-                  <p v-if="profileErrors.avatar_url" class="text-sm text-red-600 mt-1">{{ profileErrors.avatar_url }}</p>
-                  <p class="text-xs text-gray-500 mt-1">Ingresa una URL a una imagen</p>
+                  <p v-if="profileErrors.avatar_url" class="text-sm text-red-500 mt-1">{{ profileErrors.avatar_url }}</p>
                 </div>
 
                 <button
                   type="submit"
                   :disabled="isSubmittingProfile"
-                  class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 disabled:bg-gray-400"
+                  class="w-full bg-neon-cyan text-dark-bg font-black py-4 rounded-xl hover:bg-white hover:text-dark-bg hover:shadow-[0_0_20px_rgba(0,243,255,0.6)] disabled:bg-gray-700 disabled:text-gray-500 transition-all text-lg uppercase tracking-widest mt-4"
                 >
-                  {{ isSubmittingProfile ? 'Guardando...' : 'Guardar cambios' }}
+                  {{ isSubmittingProfile ? 'GUARDANDO...' : 'GUARDAR CAMBIOS' }}
                 </button>
               </form>
             </div>
           </div>
 
           <!-- Links Tab -->
-          <div v-if="activeTab === 'links'" class="bg-white rounded-lg shadow p-6 space-y-6">
+          <div v-if="activeTab === 'links'" class="bg-dark-panel border border-neon-magenta/30 rounded-xl shadow-[0_0_15px_rgba(255,0,255,0.1)] p-6 space-y-6">
             <div>
-              <h3 class="text-2xl font-bold text-gray-900 mb-4">Mis Enlaces</h3>
+              <h3 class="text-2xl font-black text-gray-100 mb-6 uppercase tracking-wide">Mis Enlaces</h3>
 
               <!-- Add Link Form -->
-              <div class="mb-6 p-4 bg-gray-50 rounded-lg">
-                <h4 class="font-semibold text-gray-900 mb-3">Agregar nuevo enlace</h4>
-                <form @submit.prevent="addLink" class="space-y-3">
+              <div class="mb-8 p-6 bg-dark-bg border border-dark-border rounded-xl">
+                <h4 class="font-bold text-gray-200 mb-4 uppercase tracking-wide text-sm">Agregar nuevo enlace</h4>
+                <form @submit.prevent="addLink" class="space-y-4">
                   <div>
                     <input
                       v-model="linkForm.title"
@@ -168,10 +164,10 @@
                       required
                       maxlength="100"
                       placeholder="Título del enlace (ej: Mi YouTube)"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      class="w-full px-4 py-3 bg-dark-panel border border-dark-border text-white rounded-lg focus:outline-none focus:border-neon-magenta focus:ring-1 focus:ring-neon-magenta placeholder-gray-600"
                       :class="{ 'border-red-500': linkErrors.title }"
                     />
-                    <p v-if="linkErrors.title" class="text-sm text-red-600 mt-1">{{ linkErrors.title }}</p>
+                    <p v-if="linkErrors.title" class="text-sm text-red-500 mt-1">{{ linkErrors.title }}</p>
                   </div>
                   <div>
                     <input
@@ -179,17 +175,17 @@
                       type="url"
                       required
                       placeholder="URL (ej: https://youtube.com/...)"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      class="w-full px-4 py-3 bg-dark-panel border border-dark-border text-white rounded-lg focus:outline-none focus:border-neon-magenta focus:ring-1 focus:ring-neon-magenta placeholder-gray-600"
                       :class="{ 'border-red-500': linkErrors.url }"
                     />
-                    <p v-if="linkErrors.url" class="text-sm text-red-600 mt-1">{{ linkErrors.url }}</p>
+                    <p v-if="linkErrors.url" class="text-sm text-red-500 mt-1">{{ linkErrors.url }}</p>
                   </div>
                   <button
                     type="submit"
                     :disabled="isSubmittingLink"
-                    class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 disabled:bg-gray-400"
+                    class="w-full bg-neon-magenta text-white font-black py-3 rounded-lg hover:bg-white hover:text-dark-bg hover:shadow-[0_0_15px_rgba(255,0,255,0.6)] disabled:bg-gray-700 disabled:text-gray-500 transition-all uppercase tracking-widest mt-2"
                   >
-                    {{ isSubmittingLink ? 'Agregando...' : 'Agregar enlace' }}
+                    {{ isSubmittingLink ? 'AGREGANDO...' : 'AGREGAR ENLACE' }}
                   </button>
                 </form>
               </div>
@@ -199,17 +195,17 @@
                 <div
                   v-for="(link, index) in links"
                   :key="link.id"
-                  class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100"
+                  class="flex items-center justify-between p-4 bg-dark-bg border border-dark-border rounded-lg hover:border-neon-magenta hover:shadow-[0_0_10px_rgba(255,0,255,0.2)] transition-all"
                 >
-                  <div class="flex-1">
-                    <p class="font-semibold text-gray-900">{{ link.title }}</p>
-                    <p class="text-sm text-gray-600 truncate">{{ link.url }}</p>
+                  <div class="flex-1 overflow-hidden pr-4">
+                    <p class="font-bold text-gray-200 uppercase tracking-wide">{{ link.title }}</p>
+                    <p class="text-sm text-gray-500 truncate">{{ link.url }}</p>
                   </div>
                   <button
                     @click="deleteLink(link.id)"
-                    class="ml-4 text-red-600 hover:text-red-700 font-semibold"
+                    class="text-red-500 hover:text-red-400 hover:drop-shadow-[0_0_5px_rgba(239,68,68,0.8)] font-bold transition-all uppercase text-sm tracking-wider"
                   >
-                    Eliminar
+                    ELIMINAR
                   </button>
                 </div>
               </div>
@@ -220,33 +216,35 @@
           </div>
 
           <!-- Supports Tab -->
-          <div v-if="activeTab === 'supports'" class="bg-white rounded-lg shadow p-6 space-y-6">
+          <div v-if="activeTab === 'supports'" class="bg-dark-panel border border-neon-green/30 rounded-xl shadow-[0_0_15px_rgba(57,255,20,0.1)] p-6 space-y-6">
             <div>
-              <h3 class="text-2xl font-bold text-gray-900 mb-4">Apoyos Recibidos</h3>
+              <h3 class="text-2xl font-black text-gray-100 mb-6 uppercase tracking-wide">Apoyos Recibidos</h3>
 
-              <div class="grid grid-cols-2 gap-4 mb-6">
-                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg">
-                  <p class="text-sm text-blue-600 font-medium">Total de apoyos</p>
-                  <p class="text-3xl font-bold text-blue-900">{{ totalSupports }}</p>
+              <div class="grid grid-cols-2 gap-4 mb-8">
+                <div class="bg-dark-bg border border-neon-cyan/50 p-6 rounded-xl relative overflow-hidden">
+                  <div class="absolute top-0 right-0 w-16 h-16 bg-neon-cyan opacity-10 rounded-full blur-xl -mr-4 -mt-4"></div>
+                  <p class="text-sm text-neon-cyan font-bold uppercase tracking-wide">Total de apoyos</p>
+                  <p class="text-4xl font-black text-gray-100 mt-2">{{ totalSupports }}</p>
                 </div>
-                <div class="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-lg">
-                  <p class="text-sm text-green-600 font-medium">Monto recaudado</p>
-                  <p class="text-3xl font-bold text-green-900">CLP {{ formatAmount(totalAmount) }}</p>
+                <div class="bg-dark-bg border border-neon-green/50 p-6 rounded-xl relative overflow-hidden">
+                  <div class="absolute top-0 right-0 w-16 h-16 bg-neon-green opacity-10 rounded-full blur-xl -mr-4 -mt-4"></div>
+                  <p class="text-sm text-neon-green font-bold uppercase tracking-wide">Monto recaudado</p>
+                  <p class="text-3xl font-black text-gray-100 mt-2 drop-shadow-[0_0_5px_rgba(57,255,20,0.3)]">CLP {{ formatAmount(totalAmount) }}</p>
                 </div>
               </div>
 
-              <div v-if="supports.length > 0" class="space-y-3 max-h-96 overflow-y-auto">
+              <div v-if="supports.length > 0" class="space-y-4 max-h-96 overflow-y-auto pr-2 custom-scrollbar">
                 <div
                   v-for="support in supports"
                   :key="support.id"
-                  class="p-4 border border-gray-200 rounded-lg"
+                  class="p-5 bg-dark-bg border border-dark-border rounded-xl hover:border-neon-green/50 transition-colors"
                 >
-                  <div class="flex justify-between items-start mb-2">
-                    <span class="font-semibold text-gray-900">{{ support.supporter_name }}</span>
-                    <span class="text-green-600 font-bold">CLP {{ formatAmount(support.amount) }}</span>
+                  <div class="flex justify-between items-start mb-3">
+                    <span class="font-bold text-gray-200">{{ support.supporter_name }}</span>
+                    <span class="text-neon-green font-black tracking-wider text-lg">CLP {{ formatAmount(support.amount) }}</span>
                   </div>
-                  <p v-if="support.message" class="text-gray-600 text-sm">{{ support.message }}</p>
-                  <p class="text-xs text-gray-400 mt-2">{{ formatDate(support.created_at) }}</p>
+                  <p v-if="support.message" class="text-gray-400 text-sm italic mb-2">"{{ support.message }}"</p>
+                  <p class="text-xs text-gray-600 font-mono">{{ formatDate(support.created_at) }}</p>
                 </div>
               </div>
               <div v-else class="text-center text-gray-500 py-8">
