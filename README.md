@@ -27,10 +27,10 @@ Plataforma web donde los creadores de contenido pueden crear su página personal
 
 ## 📋 Requisitos Previos
 
-- **PHP** >= 8.3 con extensiones: `pdo_sqlite`, `mbstring`, `openssl`, `tokenizer`, `xml`, `ctype`, `json`
-- **Composer** >= 2.x
-- **Node.js** >= 18.x
-- **npm** >= 9.x
+- **PHP** >= 8.3 (Probado en 8.5.7) con extensiones: `pdo_sqlite`, `mbstring`, `openssl`, `tokenizer`, `xml`, `ctype`, `json`
+- **Composer** >= 2.x (Probado en v2.10.1)
+- **Node.js** >= 18.x (Probado en v22.15.1)
+- **npm** >= 9.x (Probado en v10.9.2)
 
 ## ⚙️ Instalación
 

@@ -61,7 +61,7 @@ Bienvenido a **CreatorsWeb**. Aquí encontrarás guías para entender y usar el 
 1. Lee: README.md (Completo)
 2. Lee: VERIFICACION.md (Estructura)
 3. Instala y ejecuta
-4. Modifica code en app/, resources/js/
+4. Modifica el código en app/, resources/js/
 5. npm run dev automáticamente recarga
 ```
 ⏱️ Tiempo: Variable
